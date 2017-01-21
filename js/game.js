@@ -1,30 +1,5 @@
 'use strict';
 
-var fireballSize = 22;
-var wizardSpeed = 3;
-var wizardWidth = 70;
-
-var getFireballSpeed = function(left) {
-  if (left == true) {
-    return 5;
-  } else {
-    return 2;
-  }
-};
-var getWizardHeight = function(wizardWidth) {
-  return 1.337 * wizardWidth;
-};
-
-function getWizardX(width) {
-  return width / 2;
-}
-
-function getWizardY(height) {
-  return Math.round(height / 3);
-}
-
-
-
 window.GameConstants = {
   Fireball: {
     size: window.fireballSize || 24,
@@ -71,6 +46,8 @@ window.Game = (function () {
     LEVITATE: 3,
     HIT_THE_MARK: 4
   };
+
+  var NAMES = ['Кекс', 'Катя', 'Игорь'];
 
   /**
    * Порядок прохождения уровней.
@@ -463,6 +440,14 @@ window.Game = (function () {
       var message;
       switch (this.state.currentStatus) {
         case Verdict.WIN:
+          if (window.renderStatistics) {
+            var statistics = this._generateStatistics(new Date() - this.state.startTime);
+            var keys = this._schuffleArray(Object.keys(statistics));
+            window.renderStatistics(this.ctx, keys, keys.map(function (it) {
+              return statistics[it];
+            }));
+            return;
+          }
           message = 'Вы победили Газебо!\nУра!';
           break;
         case Verdict.FAIL:
@@ -477,6 +462,36 @@ window.Game = (function () {
       }
 
       this._drawMessage(message);
+    },
+
+    _generateStatistics: function (time) {
+      var generationIntervalSec = 3000;
+      var minTimeInSec = 1000;
+
+      var statistic = {
+        'Вы': time
+      };
+
+      for (var i = 0; i < NAMES.length; i++) {
+        var diffTime = Math.random() * generationIntervalSec;
+        var userTime = time + (diffTime - generationIntervalSec / 2);
+        if (userTime < minTimeInSec) {
+          userTime = minTimeInSec;
+        }
+        statistic[NAMES[i]] = userTime;
+      }
+
+      return statistic;
+    },
+
+    _schuffleArray: function (array) {
+      for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+      }
+      return array;
     },
 
     _drawMessage: function (message) {
