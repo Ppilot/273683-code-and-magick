@@ -11,7 +11,7 @@ var moveY = 10;           // Начальная коодината облака 
 var width = 420;          // Ширина облака
 var heigth = 270;         // Высота облака
 var centerGraph;          // Начальная точка первой гистограммы. Вычисляется автоматически и зависит от количества столбцов.
-
+var timesPlayers;
 
 
 
@@ -72,22 +72,13 @@ ctx.fillStyle = 'rgba(255, 0, 0, 1)';
 else {
 ctx.fillStyle = 'rgba(0, 0, 254,'+(0.2+(0.9-0.2)*Math.random())+')';
 }
-ctx.fillRect(moveX+centerGraph+i*90, heigth+moveY-30-Math.round(times[i]/timesMax*150), 40, Math.round(times[i]/timesMax*150));
-ctx.fillText(times[i], moveX+centerGraph+i*90, heigth+moveY-40-Math.round(times[i]/timesMax*150));
+timesPlayers=Math.round(times[i]/timesMax*150);
+ctx.fillRect(moveX+centerGraph+i*90, heigth+moveY-30-timesPlayers, 40, timesPlayers);
+ctx.fillText(Math.round(times[i]), moveX+centerGraph+i*90, heigth+moveY-40-timesPlayers);
 ctx.fillText(names[i], moveX+centerGraph+i*90, heigth+moveY-10);
 ctx.closePath();
 ctx.fill();
 }
 
 }
-renderStatistics(canvas.getContext('2d'),['Иван', 'Игнат', 'Вера', 'Семен', 'Вы'], [20.32, 40.15, 22.28, 55.28, 74.28]);
-
-
-
-
-
-
-// windows.renderStatistics = function (ctx, names, times) {
-//
-//
-// }
+// renderStatistics(canvas.getContext('2d'),['Иван', 'Игнат', 'Вера', 'Семен', 'Вы'], [20.32, 40.15, 22.28, 55.28, 74.28]);
