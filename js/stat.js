@@ -14,26 +14,26 @@ var centerGraph; // Начальная точка первой гистогра�
 var timesPlayers;
 
 // Фуникция формирования облака
-var drawCloud = function(ctx, moveX, moveY, width, heigth, colorCloud) {
-  ctx.beginPath();
-  ctx.moveTo(moveX, moveY);
-  ctx.fillStyle = colorCloud;
-  var lengthArcX = Math.round(width / 14);
-  var lengthArcY = Math.round(heigth / 9);
+var drawCloud = function (ctx1, moveX1, moveY1, width1, heigth1, colorCloud) {
+  ctx1.beginPath();
+  ctx1.moveTo(moveX1, moveY1);
+  ctx1.fillStyle = colorCloud;
+  var lengthArcX = Math.round(width1 / 14);
+  var lengthArcY = Math.round(heigth1 / 9);
   for (var i = 1; i < 10; i++) {
-    ctx.quadraticCurveTo(moveX - 8, moveY - lengthArcY / 2 + (i * lengthArcY), moveX, moveY + (i * lengthArcY));
+    ctx1.quadraticCurveTo(moveX1 - 8, moveY1 - lengthArcY / 2 + (i * lengthArcY), moveX1, moveY1 + (i * lengthArcY));
   }
   for (i = 1; i < 15; i++) {
-    ctx.quadraticCurveTo(moveX - lengthArcX / 2 + (i * lengthArcX), moveY + heigth + 8, moveX + (i * lengthArcX), moveY + heigth);
+    ctx1.quadraticCurveTo(moveX1 - lengthArcX / 2 + (i * lengthArcX), moveY1 + heigth1 + 8, moveX1 + (i * lengthArcX), moveY1 + heigth1);
   }
   for (i = 1; i < 10; i++) {
-    ctx.quadraticCurveTo(moveX + width + 8, moveY + heigth - (i * lengthArcY) + lengthArcY / 2, moveX + width, moveY + heigth - (i * lengthArcY));
+    ctx1.quadraticCurveTo(moveX1 + width1 + 8, moveY1 + heigth1 - (i * lengthArcY) + lengthArcY / 2, moveX1 + width1, moveY1 + heigth1 - (i * lengthArcY));
   }
   for (i = 1; i < 15; i++) {
-    ctx.quadraticCurveTo(moveX + width - (i * lengthArcX) + lengthArcX / 2, moveY - 8, moveX + width - (i * lengthArcX), moveY);
+    ctx1.quadraticCurveTo(moveX1 + width1 - (i * lengthArcX) + lengthArcX / 2, moveY1 - 8, moveX1 + width1 - (i * lengthArcX), moveY1);
   }
-  ctx.closePath();
-  ctx.fill();
+  ctx1.closePath();
+  ctx1.fill();
 };
 
 // Рисуем тень облака
@@ -51,7 +51,7 @@ ctx.font = '16px PT Mono';
 ctx.fillText('Список результатов:', 225, 60);
 
 // Функция формирования гитограмм
-var renderStatistics = function(ctx, names, times) {
+var renderStatistics = function (ctx, names, times) {
 
   // Поиск максимального элемента из массива времени
   for (var i = 0, timesMax = times[0]; i < times.length; i++) {
@@ -63,7 +63,7 @@ var renderStatistics = function(ctx, names, times) {
   centerGraph = (width - (times.length * 40 + (times.length - 1) * 50)) / 2;
   for (i = 0; i < times.length; i++) {
     ctx.beginPath();
-    if (names[i] == 'Вы') {
+    if (names[i] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     } else {
       ctx.fillStyle = 'rgba(0, 0, 254,' + (0.2 + (0.9 - 0.2) * Math.random()) + ')';
@@ -76,4 +76,4 @@ var renderStatistics = function(ctx, names, times) {
     ctx.fill();
   }
 };
-// renderStatistics(canvas.getContext('2d'),['Иван', 'Игнат', 'Вера', 'Семен', 'Вы'], [20.32, 40.15, 22.28, 55.28, 74.28]);
+window.renderStatistics = renderStatistics;
