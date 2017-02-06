@@ -4,7 +4,6 @@
 var setup = document.querySelector('.setup');
 var setupOpen = document.querySelector('.setup-open');
 var setupClose = document.querySelector('.setup-close');
-var wizard;
 
 setupOpen.addEventListener('click', function () {
   setup.classList.remove('invisible');
@@ -25,7 +24,7 @@ var getRandomColorSet = function (set) {
 };
 
 // Меняем цвет накидки мага слуйным образом из списка при клике.
-var wizardCoat = wizard.querySelector('#wizard-coat');
+var wizardCoat = document.querySelector('#wizard-coat');
 var wizardCoatColorsRange = [
   'rgb(101, 137, 164)',
   'rgb(241, 43, 107)',
@@ -36,11 +35,11 @@ var wizardCoatColorsRange = [
 ];
 
 wizardCoat.addEventListener('click', function () {
-  wizardCoat.style.fill = wizardCoatColorsRange[getRandomColorSet(6)];
+  wizardCoat.style.fill = wizardCoatColorsRange[getRandomColorSet(wizardCoatColorsRange.length)];
 });
 
 // Меняем цвет глаз мага слуйным образом из списка при клике.
-var wizardEyes = wizard.querySelector('#wizard-eyes');
+var wizardEyes = document.querySelector('#wizard-eyes');
 var wizardEyesColorsRange = [
   'black',
   'red',
@@ -50,7 +49,7 @@ var wizardEyesColorsRange = [
 ];
 
 wizardEyes.addEventListener('click', function () {
-  wizardEyes.style.fill = wizardEyesColorsRange[getRandomColorSet(5)];
+  wizardEyes.style.fill = wizardEyesColorsRange[getRandomColorSet(wizardEyesColorsRange.length)];
 });
 
 // Меняем цвет фаербола мага слуйным образом из списка при клике.
@@ -64,6 +63,6 @@ var wizardFireballColorsRange = [
 ];
 
 wizardFireball.addEventListener('click', function () {
-  wizardFireball.style.background = wizardFireballColorsRange[getRandomColorSet(5)];
+  wizardFireball.style.background = wizardFireballColorsRange[getRandomColorSet(wizardFireballColorsRange.length)];
 });
 

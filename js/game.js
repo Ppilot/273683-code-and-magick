@@ -1,7 +1,4 @@
 'use strict';
-var canvas;
-window.renderStatistics(canvas.getContext('2d'), ['Иван', 'Игнат', 'Вера', 'Семен', 'Вы'], [20.32, 40.15, 22.28, 20.28, 74.28]);
-
 window.GameConstants = {
   Fireball: {
     size: window.fireballSize || 24,
