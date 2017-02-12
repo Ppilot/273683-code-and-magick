@@ -1,6 +1,81 @@
 'use strict';
 
-//  Открываем и закрываем окно, воодим ограничения на длину имени
+
+var setup = document.querySelector('.setup');
+var setupOpen = document.querySelector('.setup-open');
+var setupOpenIcon = setupOpen.querySelector('.setup-open-icon');
+var setupClose = setup.querySelector('.setup-close');
+var setupSubmit = setup.querySelector('.setup-submit');
+
+
+var ENTER_KEY_CODE = 13;
+var ESC_KEY_CODE = 27;
+
+// Проверка нажатия на ENTER.
+function isEnterEvent(evt) {
+  return evt.keyCode === ENTER_KEY_CODE;
+}
+
+// При нажатии на ESC, убираем Setup.
+function setupKeydownHandler(evt) {
+  if (evt.keyCode === ESC_KEY_CODE) {
+    hideSetup();
+  }
+}
+
+// Показываем окошко Setup, убирая invisible.
+function showSetup() {
+  setup.classList.remove('invisible');
+  document.addEventListener('keydown', setupKeydownHandler);
+  togglePressed();
+}
+
+// Убираем Setup, добавляя invisible. Прекращаем отслеживание нажатия на ESC.
+function hideSetup() {
+  setup.classList.add('invisible');
+  document.removeEventListener('keydown', setupKeydownHandler);
+  togglePressed();
+}
+
+// Переключаем атрибут aria-pressed.
+function togglePressed() {
+  var pressed = (setupOpenIcon.getAttribute('aria-pressed') === 'true');
+  setupOpenIcon.setAttribute('aria-pressed', !pressed);
+}
+
+// Показываем Setup при клике на иконку.
+setupOpen.addEventListener('click', function (evt) {
+  showSetup();
+});
+
+// Показываем Setup по нажатию Enter, если фокус на иконке.
+setupOpen.addEventListener('keydown', function (evt) {
+  if (isEnterEvent(evt)) {
+    showSetup();
+  }
+});
+
+// Убираем Setup по клику на крестик.
+setupClose.addEventListener('click', function () {
+  hideSetup();
+});
+
+// прячем setup по нажатию Enter, если фокус на крестике.
+setupClose.addEventListener('keydown', function (evt) {
+  if (isEnterEvent(evt)) {
+    hideSetup();
+  }
+});
+
+// прячем setup по нажатию на Enter, если фокус на кнопке сохранить.
+setupSubmit.addEventListener('keydown', function (evt) {
+  if (isEnterEvent(evt)) {
+    hideSetup();
+  }
+});
+
+
+//  Открываем и закрываем окно, вводим ограничения на длину имени
 var setup = document.querySelector('.setup');
 var setupOpen = document.querySelector('.setup-open');
 var setupClose = document.querySelector('.setup-close');

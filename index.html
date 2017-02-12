@@ -26,17 +26,17 @@
   <div class="demo"></div>
 
   <div class="setup-open">
-    <img src="./img/user-1.jpg" class="setup-open-icon">
+    <img src="./img/user-1.jpg" class="setup-open-icon" role="button" tabindex="0">
   </div>
 </header>
 
 <div class="overlay setup invisible">
   <form class="setup-wizard-form">
-    <span class="setup-close">&times;</span>
+    <span class="setup-close" role="button" tabindex="1">&times;</span>
 
     <div class="setup-user">
       <img class="setup-user-pic" src="./img/user-1.jpg" />
-      <input type="text" class="setup-user-name" value="Синий Пендальф" maxlength="3" />
+      <input type="text" class="setup-user-name" tabindex="2" value="Синий Пендальф" maxlength="3" />
     </div>
 
     <div class="setup-wizard-appearance">
@@ -98,7 +98,7 @@
       <div class="setup-artifacts-cell"></div>
     </div>
 
-    <button class="button setup-submit">Сохранить</button>
+    <button class="button setup-submit" tabindex="3">Сохранить</button>
   </form>
 </div>
 
